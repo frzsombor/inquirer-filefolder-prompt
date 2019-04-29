@@ -37,7 +37,7 @@ class FileFolderPrompt extends Base {
     // Initialize the dialog
     var dialogType = this.opt.dialog.type || 'OpenFileDialog';
     var dialogConfig = this.opt.dialog.config || {};
-    this.dialog = new FileFolderDialogs[dialogType]();
+    this.dialog = new FileFolderDialogs[dialogType](dialogConfig);
 
     // Init
     this.render();

@@ -10,8 +10,10 @@ inquirer.prompt({
   dialog: {
       type: 'OpenFileDialog',
       config: {
-          'title': 'Open',
-          //...
+        win32: {
+            title: 'Please select "DJI Assistant 2.exe"',
+        }
+        //...
       },
   },
   validate: function(file) {
