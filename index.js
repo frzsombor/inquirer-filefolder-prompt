@@ -31,6 +31,9 @@ class FileFolderPrompt extends Base {
     this.currentText = this.opt.default;
     this.opt.default = null;
 
+    // Initialize CTA
+    this.messageCTA = this.opt.messageCTA || 'Press <enter> to open dialog.';
+
     // Initialize the dialog
     var dialogType = this.opt.dialog.type || 'OpenFileDialog';
     var dialogConfig = this.opt.dialog.config || {};
@@ -52,9 +55,9 @@ class FileFolderPrompt extends Base {
     var message = this.getQuestion();
 
     if (this.status === 'answered') {
-      message += chalk.dim('Received');
+      message += chalk.dim('Selected');
     } else {
-      message += chalk.dim('Press <enter> to open the dialog.');
+      message += chalk.dim(this.messageCTA);
     }
 
     if (error) {
@@ -69,6 +72,9 @@ class FileFolderPrompt extends Base {
    */
 
   openDialog() {
+    var message = this.getQuestion() + chalk.dim(this.messageCTA + ' Waiting...');
+    this.screen.render(message, '');
+
     // Pause Readline to prevent stdin and stdout from being modified while the editor is showing
     this.rl.pause();
     this.dialog.open(this.endDialog.bind(this));
